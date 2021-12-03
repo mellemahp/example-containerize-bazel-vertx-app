@@ -20,8 +20,17 @@ java_library(
     name = "common_dependencies",
     exports = [
         ":dagger_lib",
-        "@maven//:io_vertx_vertx_core"
+        "@maven//:io_vertx_vertx_core",
+        "@maven//:io_vertx_vertx_web_openapi",
+        "@maven//:io_vertx_vertx_web_validation",
+        "@maven//:io_vertx_vertx_web",
+        "@maven//:io_vertx_vertx_web_api_contract"
     ],
+)
+
+filegroup(
+    name="petstoreyaml",
+    srcs = ["src/main/resources/petstore.yaml"],
 )
 
 
@@ -33,4 +42,7 @@ java_binary(
     deps = [
         ":common_dependencies"
     ],
+    resources = [
+        ":petstoreyaml"
+    ]
 )

@@ -10,8 +10,7 @@ import java.util.Map;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
-/**
- */
+
 @Module
 public class DaggerVerticleFactoryModule {
     @Provides

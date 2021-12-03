@@ -5,8 +5,9 @@ import dagger.Provides;
 import io.vertx.core.Vertx;
 import io.vertx.core.spi.VerticleFactory;
 import javax.inject.Singleton;
+import com.example.dagger.modules.DaggerVerticleFactoryModule;
 
-@Module
+@Module(includes = DaggerVerticleFactoryModule.class)
 public class VertxModule {
     @Provides
     @Singleton

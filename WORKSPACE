@@ -24,7 +24,12 @@ maven_install(
         "io.vertx:vertx-core:4.2.1",
         "io.vertx:vertx-junit5:4.2.1",
         "org.junit.jupiter:junit-jupiter-api:5.8.2",
-        "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+        "org.junit.jupiter:junit-jupiter-engine:5.8.2",
+        # openapi build 
+        "io.vertx:vertx-web-openapi:4.2.1",
+        "io.vertx:vertx-web-validation:4.2.1",
+        "io.vertx:vertx-web:4.2.1",
+        "io.vertx:vertx-web-api-contract:4.2.1"
     ],
     repositories = [
         "https://repo1.maven.org/maven2",
