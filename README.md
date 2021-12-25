@@ -5,4 +5,4 @@
 - Creates a docker container for deployment
 - Uses Smithy to define the API 
 - Provides a number of default handlers
-- Automatically builds in API validation handlers using the Rest 
+- Automatically builds in API validation handlers using the OpenApi router from Vertx
