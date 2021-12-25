@@ -1,23 +1,22 @@
 package com.example.starter;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
+import java.util.List;
+import javax.inject.Inject;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class Application {
-    private final Vertx vertx;
-    private final MainVerticle mainVerticle;
 
-    @Inject
-    public Application(Vertx vertx, MainVerticle mainVerticle) {
-        this.vertx = vertx;
-        this.mainVerticle = mainVerticle;
-    }
+  @NonNull
+  private final Vertx vertx;
 
-    public void run() {
-        vertx.deployVerticle(mainVerticle);
-    }
+  @NonNull
+  private final MainVerticle mainVerticle;
+
+  public void run() {
+    vertx.deployVerticle(mainVerticle);
+  }
 }

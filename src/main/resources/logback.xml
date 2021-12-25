@@ -1,0 +1,30 @@
+<configuration>
+    <variable name="APPLICATION_LOG_LEVEL" value="${APPLICATION_LOG_LEVEL:-INFO}" />
+
+    <conversionRule conversionWord="vcl" converterClass="io.reactiverse.contextual.logging.LogbackConverter" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <jsonGeneratorDecorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator" />
+            <providers>
+                <timestamp />
+                <logLevel />
+                <pattern>
+                    <omitEmptyFields>true</omitEmptyFields>
+                    <pattern>
+                        { 
+                            "requestId": "%vcl{requestId}",
+                            "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+                <stackTrace />
+                <throwableClassName />
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="${APPLICATION_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

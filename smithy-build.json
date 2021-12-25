@@ -1,0 +1,14 @@
+{
+    "version": "1.0",
+    "projections": {
+        "model": {
+            "plugins": {
+                "openapi": {
+                    "service": "example.petstore#PetStoreService",
+                    "useJsonName": true,
+                    "keepUnusedComponents": true
+                }
+            }
+        }
+    }  
+}
