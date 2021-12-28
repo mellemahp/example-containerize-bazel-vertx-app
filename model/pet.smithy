@@ -15,18 +15,18 @@ resource Pet {
     uri: "/pets/{petId}"
 )
 operation GetPetById {
-    input: GetPetByIdInput,
-    output: GetPetByIdOutput,
+    input: GetPetByIdRequest,
+    output: GetPetByIdResponse,
     errors: [NoSuchPet]
 }
 
-structure GetPetByIdInput {
+structure GetPetByIdRequest{
     @required
     @httpLabel
     petId: PetId
 }
 
-structure GetPetByIdOutput {
+structure GetPetByIdResponse {
     @required
     id: Integer,
 

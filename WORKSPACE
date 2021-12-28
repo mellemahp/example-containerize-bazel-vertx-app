@@ -1,4 +1,11 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name="vertx-utils",
+    branch="main",
+    remote="https://github.com/mellemahp/vertx-utils",
+)
 
 # import libraries from maven
 RULES_JVM_EXTERNAL_TAG = "2.8"
@@ -100,9 +107,9 @@ container_pull(
 #######################
 # Setup OpenApi tools
 #######################
-OPENAPI_GEN_VERSION = "0.1.5"
+OPENAPI_GEN_VERSION = "0.1.6"
 
-OPENAPI_GEN_SHA = "2daea1c94d6f101b4771ab3a82ef556ab1afb1669b135670b18000035ad8b60c"
+OPENAPI_GEN_SHA = "6e3019e4f63a5cb478d84e6e3852fa1f573365c5a65a513b25e8ff9def4d54e7"
 
 http_archive(
     name = "openapi_tools_generator_bazel",
@@ -117,9 +124,9 @@ openapi_tools_generator_bazel_repositories()
 #######################
 # Setup Smithy Rules
 #######################
-SMITHY_RULES_TAG = "1.0.1"
+SMITHY_RULES_TAG = "1.0.2"
 
-SMITHY_RULES_SHA = "af438b7815c89156696c4097619f1b94a49090f8ea93808eef4f1e06f8187f8c"
+SMITHY_RULES_SHA = "f75d5c677ea2e80dcae324f77b925152b7980b37d5b7f9624203eda652410ee3"
 
 http_archive(
     name = "smithy_rules",

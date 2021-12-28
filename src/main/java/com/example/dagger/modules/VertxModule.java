@@ -1,6 +1,6 @@
 package com.example.dagger.modules;
 
-import com.utils.dagger.DaggerVerticleFactory;
+import com.hmellema.vertxutils.dagger.DaggerVerticleFactory;
 import dagger.Module;
 import dagger.Provides;
 import io.vertx.core.Verticle;

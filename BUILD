@@ -1,69 +1,6 @@
 load("@io_bazel_rules_docker//java:image.bzl", "java_image")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 
-# Dagger setup
-java_plugin(
-    name = "dagger_plugin",
-    generates_api = 1,
-    processor_class = "dagger.internal.codegen.ComponentProcessor",
-    deps = [
-        "@maven//:com_google_dagger_dagger_compiler",
-    ],
-)
-
-java_library(
-    name = "dagger_lib",
-    exported_plugins = ["dagger_plugin"],
-    exports = [
-        "@maven//:com_google_dagger_dagger",
-        "@maven//:javax_inject_javax_inject",
-    ],
-)
-
-### Lombok
-java_library(
-    name = "lombok",
-    exported_plugins = [
-        ":lombok_plugin",
-    ],
-    exports = [
-        "@maven//:org_projectlombok_lombok",
-    ],
-)
-
-java_plugin(
-    name = "lombok_plugin",
-    processor_class = "lombok.launch.AnnotationProcessorHider$AnnotationProcessor",
-    deps = [
-        ":lombok_jar",
-    ],
-)
-
-java_import(
-    name = "lombok_jar",
-    jars = [
-        "@maven//:v1/https/repo1.maven.org/maven2/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar",
-    ],
-)
-
-### nullaway
-java_plugin(
-    name = "nullaway",
-    deps = [
-        "@maven//:com_uber_nullaway_nullaway",
-    ],
-)
-
-java_library(
-    name = "preprocessors",
-    exports = [
-        # NOTE: ORDER OF PLUGINS DOES MATTER
-        ":lombok",
-        ":dagger_lib",
-        ":nullaway",
-    ],
-)
-
 java_library(
     name = "runtime_logging_deps",
     visibility = ["//visibility:public"],
@@ -134,7 +71,8 @@ java_binary(
     ],
     deps = [
         ":common_dependencies",
-        ":preprocessors",
+        "@vertx-utils//:vertx_utils",
+        "@vertx-utils//:preprocessors",
         ":api_models"
     ],
 )
@@ -153,8 +91,16 @@ container_image(
 )
 
 #### SMITHY
-load("@smithy_rules//smithy:smithy.bzl", "smithy_java_models", "smithy_openapi")
-load("@smithy_rules//smithy/validation:validation.bzl", "smithy_validator_library")
+load("@smithy_rules//smithy:smithy.bzl", "smithy_library", "smithy_java_models", "smithy_openapi")
+
+smithy_library(
+    name = "default_model_validations",
+    srcs = ["@smithy_rules//smithy/validation:validators"],
+    config = "no-op-smithy-build.json",
+    filters = ["ShouldHaveUsedTimestamp"],
+    root_dir = "validators",
+)
+
 
 filegroup(
     name = "model_files",
@@ -162,10 +108,6 @@ filegroup(
 )
 
 SERVICE_NAME = "PetStoreService"
-
-smithy_validator_library(
-    name = "default_model_validations",
-)
 
 smithy_openapi(
     name = "api_openapi_spec",

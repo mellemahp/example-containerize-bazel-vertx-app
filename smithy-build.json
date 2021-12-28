@@ -6,6 +6,7 @@
                 "openapi": {
                     "service": "example.petstore#PetStoreService",
                     "useJsonName": true,
+                    "useIntegerType": true,
                     "keepUnusedComponents": true
                 }
             }

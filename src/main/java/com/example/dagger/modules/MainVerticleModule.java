@@ -2,9 +2,9 @@ package com.example.dagger.modules;
 
 import com.example.dagger.operations.GetPetsByIdModule;
 import com.example.starter.MainVerticle;
-import com.utils.handlers.requestid.RequestIdHandler;
-import com.utils.routing.OperationConfiguration;
-import com.utils.routing.RouterConfiguration;
+import com.hmellema.vertxutils.handlers.requestid.RequestIdHandler;
+import com.hmellema.vertxutils.routing.OperationConfiguration;
+import com.hmellema.vertxutils.routing.RouterConfiguration;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
